@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
 const Login = () => {
+    const AdminLogin=()=>{
+        sessionStorage.clear();
+        navigate("/AdminLogin");
+    }
     const [data, changedata] = useState({
         email: "",
         password: ""
@@ -21,7 +25,7 @@ const Login = () => {
                 if (response.data.status === "success") {
                     sessionStorage.setItem("token", response.data.token);
                     sessionStorage.setItem("userid", response.data.userid);
-                    navigate("/add");
+                    navigate("/home");
                 } else {
                     alert("Error: Invalid credentials");
                 }
@@ -74,6 +78,11 @@ const Login = () => {
                             <div>
                                 <a className="nav-link" href="/signup" style={styles.signUpLink}>Sign Up Free</a>
                             </div>
+                        </center>
+                        <center>
+                        <button className="custom-button" style={styles.LoginButton} onClick={AdminLogin}>
+                                AdminLogin
+                            </button>
                         </center>
                     </div>
                 </div>
@@ -147,6 +156,10 @@ const styles = {
     adminLoginButton: {
         fontWeight: 'bold', // Bold text
         width: '100%', // Full width button
+    },
+    LoginButton:{
+        fontWeight: 'bold', // Bold text
+        width: '39%', // Full width button 
     },
 };
 
